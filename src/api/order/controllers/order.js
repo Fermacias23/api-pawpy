@@ -29,9 +29,9 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
       totalPayment += Number(priceTemp) * product.quantity;
     });
     // You can set the selected tip percentage here (0 for 0%, 1 for 10%, 2 for 15%, 3 for 25%)
-    const tipAmount = totalPayment * tip;
+    const tipAmount = totalPayment * (tip/100);
     const deliveryFee = totalPayment > 25 ? 0 : 5.99;
-    totalPayment = tipAmount + deliveryFee;
+    totalPayment = tipAmount + deliveryFee + totalPayment;
 
     const charge = await stripe.charges.create({
       amount: Math.round(totalPayment * 100),
@@ -46,7 +46,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
       totalPayment,
       idPayment: charge.id,
       addressShipping,
-      tipAmount,
+      tip,
       deliveryFee,
     };
 
