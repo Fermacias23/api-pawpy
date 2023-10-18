@@ -4,7 +4,8 @@
   "info": {
     "singularName": "order",
     "pluralName": "orders",
-    "displayName": "Order"
+    "displayName": "Order",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -31,6 +32,9 @@
     "products": {
       "type": "json",
       "required": true
+    },
+    "tip": {
+      "type": "decimal"
     }
   }
 }
