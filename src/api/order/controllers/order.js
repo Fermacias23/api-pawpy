@@ -21,13 +21,17 @@ const { createCoreController } = require("@strapi/strapi").factories;
 
 module.exports = createCoreController("api::order.order", ({ strapi }) => ({
   async paymentOrder(ctx) {
-    const { token, products, userId, addressShipping } = ctx.request.body;
+    const { token, products, userId, addressShipping, tip } = ctx.request.body;
 
     let totalPayment = 0;
     products.forEach((product) => {
       const priceTemp = calcDiscountPrice(product.price, product.discount);
       totalPayment += Number(priceTemp) * product.quantity;
     });
+    // You can set the selected tip percentage here (0 for 0%, 1 for 10%, 2 for 15%, 3 for 25%)
+    const tipAmount = totalPayment * tip;
+    const deliveryFee = totalPayment > 25 ? 0 : 5.99;
+    totalPayment = tipAmount + deliveryFee;
 
     const charge = await stripe.charges.create({
       amount: Math.round(totalPayment * 100),
@@ -42,6 +46,8 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
       totalPayment,
       idPayment: charge.id,
       addressShipping,
+      tipAmount,
+      deliveryFee,
     };
 
     const model = strapi.contentTypes["api::order.order"];
