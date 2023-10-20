@@ -3,7 +3,7 @@ module.exports = {
     {
       method: "DELETE",
       path: "/delete-account",
-      handler: "delete.delete",
+      handler: "user.delete",
     },
   ],
 };
