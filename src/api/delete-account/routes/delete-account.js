@@ -2,11 +2,8 @@ module.exports = {
   routes: [
     {
       method: "DELETE",
-      path: "/users/:id",
-      handler: "user.delete",
-      config: {
-        policies: [],
-      },
+      path: "/delete-account",
+      handler: "delete-account.delete",
     },
   ],
 };
