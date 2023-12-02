@@ -1,6 +1,7 @@
 "use strict";
 const stripe = require("stripe")(
-  "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"
+  "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"
+  // "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"
   // "sk_test_51JBm75EtuCIyjulJux3iHYQWJvCkQYGZcPpRzQrL8oTKQJopSzmZcZzGYiJTecqCRHxkk8T3GWXSgV1MrYdpB7GR0019oK1aBj"
 );
 
@@ -29,7 +30,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
       totalPayment += Number(priceTemp) * product.quantity;
     });
     // You can set the selected tip percentage here (0 for 0%, 1 for 10%, 2 for 15%, 3 for 25%)
-    const tipAmount = totalPayment * (tip/100);
+    const tipAmount = totalPayment * (tip / 100);
     const deliveryFee = totalPayment > 25 ? 0 : 5.99;
     totalPayment = tipAmount + deliveryFee + totalPayment;
 
