@@ -1,8 +1,9 @@
 "use strict";
 const stripe = require("stripe")(
-  "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"
+//	"sk_test_51IxDkgKBx36c3hrwMvObguYg0pTpdc15frD7f83OeqRB20S6mQIgAKWdMUoYMlbvh4Ir1gksyLFETNn8JhsMH8UK00UaI7Jutl"
+   //  "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"
   // "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"
-  // "sk_test_51JBm75EtuCIyjulJux3iHYQWJvCkQYGZcPpRzQrL8oTKQJopSzmZcZzGYiJTecqCRHxkk8T3GWXSgV1MrYdpB7GR0019oK1aBj"
+   "sk_test_51JBm75EtuCIyjulJux3iHYQWJvCkQYGZcPpRzQrL8oTKQJopSzmZcZzGYiJTecqCRHxkk8T3GWXSgV1MrYdpB7GR0019oK1aBj"
 );
 
 function calcDiscountPrice(price, discount) {
